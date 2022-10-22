@@ -1,10 +1,10 @@
 <template>
-  <q-item class="GNL__drawer-item" v-ripple  clickable>
+  <q-item class="ML__drawer-item" v-ripple clickable>
     <q-item-section avatar>
-        <q-icon class="GNL__drawer-item__icon" :name="icon" />
+      <q-avatar icon="home" color="blue-1" text-color="primary" />
     </q-item-section>
     <q-item-section>
-      <q-item-label class="GNL__drawer-item__label">{{ title }}</q-item-label>
+      <q-item-label class="ML__drawer-item__label">{{ title }}</q-item-label>
     </q-item-section>
   </q-item>
 </template>
@@ -22,4 +22,6 @@ withDefaults(defineProps<EssentialLinkProps>(), {
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+
+</style>

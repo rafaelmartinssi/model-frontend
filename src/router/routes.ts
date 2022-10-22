@@ -1,15 +1,34 @@
 import { RouteRecordRaw } from 'vue-router'
+import { login, callback } from './guards'
+import AppRouterWrapper from '../components/AppRouterWrapper.vue'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', name: 'home', component: () => import('pages/IndexPage.vue') }]
+    path: '/index',
+    name: 'index',
+    component: () => import('pages/LoginPage.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('pages/LoginPage.vue')
+    component: AppRouterWrapper,
+    beforeEnter: login
+  },
+  {
+    path: '/callback',
+    component: AppRouterWrapper,
+    beforeEnter: callback
+  },
+  {
+    path: '/',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'home',
+        component: () => import('src/pages/MainPage.vue')
+      }
+    ]
   },
 
   // Always leave this as last one,

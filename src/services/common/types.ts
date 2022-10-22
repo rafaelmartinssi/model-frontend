@@ -28,7 +28,7 @@ export interface IResponseListPeageble<T> {
 }
 
 export interface Response<T> {
-  data: IResponse<T>
+  data: T
   errors: ResponseError | null
 }
 

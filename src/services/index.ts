@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { TokenService } from './TokenService'
 import { UsuarioService } from './UsuarioService'
 
 const httpClient = axios.create({
@@ -6,5 +7,6 @@ const httpClient = axios.create({
 })
 
 export default {
-  usuario: new UsuarioService(httpClient)
+  usuario: new UsuarioService(httpClient),
+  token: new TokenService(httpClient)
 }

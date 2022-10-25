@@ -9,9 +9,5 @@
 </script>
 
 <style lang="scss">
-.q-card {
-  display: flex;
-  margin: 1rem;
-  background-color: $blue-1;
-}
+
 </style>

@@ -44,7 +44,6 @@ const callback = async (
   }
 
   const token = await services.token.getTokenUser(code)
-  console.log(token)
   main.setToken(token)
   next({ name: 'home' })
 }

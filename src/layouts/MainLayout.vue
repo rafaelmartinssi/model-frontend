@@ -41,14 +41,14 @@ const toggleLeftDrawer = () => {
         <q-btn flat dense round @click="toggleLeftDrawer" aria-label="Menu" icon="menu" class="q-mr-sm" />
 
         <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
-          <span class="q-ml-sm text-bold">Olá, Rafael</span>
+          <span class="q-ml-sm">Olá, Rafael</span>
         </q-toolbar-title>
 
         <q-space />
 
         <div class="q-gutter-sm row items-center no-wrap">
           <q-btn round dense flat color="text-grey-7" icon="apps">
-            <q-tooltip>Google Apps</q-tooltip>
+            <q-tooltip>Apps</q-tooltip>
           </q-btn>
           <q-btn-dropdown fab-mini round rounded flat no-icon-animation dropdown-icon="account_circle">
             <div class="row no-wrap q-pa-md">
@@ -87,7 +87,7 @@ const toggleLeftDrawer = () => {
 
           <q-item class="ML__drawer-item" v-ripple v-for="link in utilsLinks" :key="link.title" clickable>
             <q-item-section>
-              <q-item-label class="ML__drawer-item__label">{{ link.title }}
+              <q-item-label class="ML__drawer-item__label text-primary">{{ link.title }}
                 <q-icon v-if="link.icon" :name="link.icon" />
               </q-item-label>
             </q-item-section>
@@ -126,21 +126,6 @@ const toggleLeftDrawer = () => {
       font-size: .875rem;
       font-weight: 500;
       line-height: 1.25rem;
-    }
-  }
-
-  &__drawer-footer {
-    margin: 10px 40px;
-
-    &__link {
-      color: $primary;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: .75rem;
-
-      &:hover {
-        color: darkgrey;
-      }
     }
   }
 }

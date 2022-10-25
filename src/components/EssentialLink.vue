@@ -1,7 +1,7 @@
 <template>
   <q-item class="ML__drawer-item" v-ripple clickable>
     <q-item-section avatar>
-      <q-avatar icon="home" color="blue-1" text-color="primary" />
+      <q-icon :name="icon" color="primary" />
     </q-item-section>
     <q-item-section>
       <q-item-label class="ML__drawer-item__label">{{ title }}</q-item-label>

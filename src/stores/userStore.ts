@@ -18,6 +18,7 @@ export const useMainStore: StoreDefinition = defineStore<'main', State>({
   getters: {
     userSession: (state) => ({ ...state._userSession }),
     token: (state) => state._token.access_token,
+    userName: (state) => state._userSession.nome,
     isLogged: (state) => state._isLogged
   },
   actions: {

@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue'
 import AppFooter from 'src/components/AppFooter.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const essentialLinks: EssentialLinkProps[] = [
   {
@@ -26,6 +29,12 @@ const utilsLinks: EssentialLinkProps[] = [
     path: '/'
   }
 ]
+
+const logout = () => {
+  router.push({
+    name: 'logout'
+  })
+}
 
 const leftDrawerOpen = ref(false)
 
@@ -65,7 +74,7 @@ const toggleLeftDrawer = () => {
 
                 <div class="text-subtitle1 q-mt-md q-mb-xs">Rafael</div>
 
-                <q-btn color="primary" label="SAIR" push size="sm" v-close-popup />
+                <q-btn color="primary" label="SAIR" push size="sm" @click="logout" v-close-popup />
               </div>
             </div>
           </q-btn-dropdown>

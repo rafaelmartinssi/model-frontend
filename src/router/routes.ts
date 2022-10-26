@@ -1,8 +1,13 @@
 import { RouteRecordRaw } from 'vue-router'
-import { login, callback } from './guards'
+import { login, callback, logout, isAuthenticated } from './guards'
 import AppRouterWrapper from '../components/AppRouterWrapper.vue'
+import MainLayout from '../layouts/MainLayout.vue'
 
 const routes: RouteRecordRaw[] = [
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: { name: 'index' }
+  },
   {
     path: '/index',
     name: 'index',
@@ -20,13 +25,20 @@ const routes: RouteRecordRaw[] = [
     beforeEnter: login
   },
   {
+    path: '/logout',
+    name: 'logout',
+    component: AppRouterWrapper,
+    beforeEnter: logout
+  },
+  {
     path: '/callback',
     component: AppRouterWrapper,
     beforeEnter: callback
   },
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: MainLayout,
+    beforeEnter: isAuthenticated,
     children: [
       {
         path: '',
@@ -34,13 +46,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/pages/MainPage.vue')
       }
     ]
-  },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
   }
 ]
 

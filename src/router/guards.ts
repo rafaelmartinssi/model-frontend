@@ -2,6 +2,23 @@ import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import { useMainStore } from 'src/stores/userStore'
 import services from 'src/services'
 
+const isAuthenticated = (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext) => {
+  const main = useMainStore()
+  const token = main.token
+
+  if (!token) {
+    next('/index')
+    return
+  }
+
+  // tenho que terminar
+
+  next()
+}
+
 const login = (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
@@ -39,13 +56,26 @@ const callback = async (
   const code = params.get('code')
 
   if (!code) {
-    next({ name: 'login' })
+    next({ name: 'index' })
     return
   }
 
-  const token = await services.token.getTokenUser(code)
-  main.setToken(token)
-  next({ name: 'home' })
+  try {
+    const token = await services.token.getTokenUser(code)
+    main.setToken(token.data)
+    next({ name: 'home' })
+  } catch (error) {
+    console.error(error)
+    next({ name: 'index' })
+  }
 }
 
-export { login, callback }
+const logout = () => {
+  const main = useMainStore()
+
+  const logoutUrl = new URL('http://localhost:8080/logout')
+  location.href = logoutUrl.toString()
+  main.logout()
+}
+
+export { login, callback, logout, isAuthenticated }

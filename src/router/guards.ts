@@ -2,7 +2,11 @@ import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import { useMainStore } from 'src/stores/userStore'
 import services from 'src/services'
 
-const isAuthenticated = (
+const getUser = async () => {
+  return (await services.usuario.findById(1)).data
+}
+
+const isAuthenticated = async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext) => {
@@ -14,7 +18,16 @@ const isAuthenticated = (
     return
   }
 
-  // tenho que terminar
+  try {
+    if (!main.user) {
+      main.setUser(await getUser())
+    }
+    console.log(main.user)
+  } catch (error) {
+    main.logout()
+    next('/login')
+    return
+  }
 
   next()
 }
@@ -63,6 +76,8 @@ const callback = async (
   try {
     const token = await services.token.getTokenUser(code)
     main.setToken(token.data)
+    main.setUser(await (await services.usuario.findById(token.data.user_id)).data)
+    console.log(main.user)
     next({ name: 'home' })
   } catch (error) {
     console.error(error)

@@ -3,7 +3,7 @@ import { useMainStore } from 'src/stores/userStore'
 import services from 'src/services'
 
 const getUser = async () => {
-  return (await services.usuario.findById(1)).data
+  return (await services.user.getUser()).data.content
 }
 
 const isAuthenticated = async (
@@ -22,7 +22,6 @@ const isAuthenticated = async (
     if (!main.user) {
       main.setUser(await getUser())
     }
-    console.log(main.user)
   } catch (error) {
     main.logout()
     next('/login')
@@ -76,8 +75,7 @@ const callback = async (
   try {
     const token = await services.token.getTokenUser(code)
     main.setToken(token.data)
-    main.setUser(await (await services.usuario.findById(token.data.user_id)).data)
-    console.log(main.user)
+    main.setUser((await services.user.getUser()).data.content)
     next({ name: 'home' })
   } catch (error) {
     console.error(error)

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { TokenService } from './TokenService'
-import { UsuarioService } from './UsuarioService'
+import { UserService } from './UserService'
 import { useMainStore } from 'src/stores/userStore'
 
 const httpClient = axios.create({
@@ -17,6 +17,6 @@ httpClient.interceptors.request.use((config) => {
 })
 
 export default {
-  usuario: new UsuarioService(httpClient),
+  user: new UserService(httpClient),
   token: new TokenService(httpClient)
 }

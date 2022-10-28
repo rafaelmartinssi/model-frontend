@@ -27,8 +27,13 @@ export interface IResponseListPeageble<T> {
   info: Info[]
 }
 
-export interface Response<T> {
+export interface ResponseToken<T> {
   data: T
+  errors: ResponseError | null
+}
+
+export interface Response<T> {
+  data: IResponse<T>
   errors: ResponseError | null
 }
 

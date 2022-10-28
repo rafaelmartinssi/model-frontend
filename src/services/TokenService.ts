@@ -1,10 +1,10 @@
 import type { Token } from 'src/stores/types'
-import type { Response } from './common/types'
+import type { ResponseToken } from './common/types'
 import { RequestPath, RestClient } from './common/rest-client'
 
 @RequestPath('/oauth/token')
 class TokenService extends RestClient<{ id?: number }> {
-  public async getTokenUser (code: string): Promise<Response<Token>> {
+  public async getTokenUser (code: string): Promise<ResponseToken<Token>> {
     const params = new URLSearchParams()
     params.append('code', code)
     params.append('grant_type', 'authorization_code')

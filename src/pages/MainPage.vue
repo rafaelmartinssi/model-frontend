@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { UsuarioModel } from 'src/model/UsuarioModel'
 import services from 'src/services'
+import { User } from 'src/stores/types'
 import { reactive } from 'vue'
 
 interface State {
-  usuario: UsuarioModel
+  usuario: User
 }
 const state = reactive<State>({
-  usuario: {} as UsuarioModel
+  usuario: {} as User
 })
 
 const search = async () => {
-  const response = await services.usuario.findById(1)
-  state.usuario = response.data
+  const response = await services.user.findById(1)
   console.log(response)
+  state.usuario = response.data.content
 }
 </script>
 

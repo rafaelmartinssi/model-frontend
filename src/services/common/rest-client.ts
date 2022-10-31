@@ -68,7 +68,7 @@ export abstract class RestClient<T extends { id?: number }, F = null> {
 
   protected handleResponse (response: AxiosResponse) {
     let errors: ResponseError | null = null
-
+    console.log(response.status)
     if (!response.data && response.status !== 200) {
       errors = {
         status: response.request.status,

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue'
-import AppFooter from 'src/components/AppFooter.vue'
 import { useRouter } from 'vue-router'
+import AppFooterLogged from 'src/components/AppFooterLogged.vue'
 
 const router = useRouter()
 
@@ -14,9 +14,27 @@ const essentialLinks: EssentialLinkProps[] = [
   }
 ]
 
-const otherLinks: EssentialLinkProps[] = [
+const laudosLinks: EssentialLinkProps[] = [
   {
-    title: 'Docs',
+    title: 'Laudos',
+    icon: 'school',
+    path: '/'
+  },
+  {
+    title: 'Criar Laudos',
+    icon: 'school',
+    path: '/'
+  }
+]
+
+const agendaLinks: EssentialLinkProps[] = [
+  {
+    title: 'Agenda',
+    icon: 'school',
+    path: '/'
+  },
+  {
+    title: 'Criar Agenda',
     icon: 'school',
     path: '/'
   }
@@ -36,6 +54,12 @@ const logout = () => {
   })
 }
 
+const changePassword = () => {
+  router.push({
+    name: 'password-change'
+  })
+}
+
 const leftDrawerOpen = ref(false)
 
 const toggleLeftDrawer = () => {
@@ -44,7 +68,7 @@ const toggleLeftDrawer = () => {
 </script>
 
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-grey-1">
+  <q-layout view="hHh lpR lFf" class="bg-grey-2">
     <q-header elevated class="bg-primary text-white" height-hint="64">
       <q-toolbar class="ML__toolbar">
         <q-btn flat dense round @click="toggleLeftDrawer" aria-label="Menu" icon="menu" class="q-mr-sm" />
@@ -63,6 +87,14 @@ const toggleLeftDrawer = () => {
             <div class="row no-wrap q-pa-md">
               <div class="column">
                 <div class="text-h6 q-mb-md">Configurações</div>
+                <q-list>
+                  <q-item clickable v-ripple @click="changePassword">
+                    <q-item-section>Alterar senha</q-item-section>
+                    <q-item-section avatar>
+                      <q-icon color="primary" name="sync_lock"></q-icon>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
               </div>
 
               <q-separator vertical inset class="q-mx-lg" />
@@ -88,13 +120,15 @@ const toggleLeftDrawer = () => {
 
           <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
 
-          <q-separator inset class="q-my-sm" />
+          <q-separator inset class="q-my-xs" />
 
-          <EssentialLink v-for="link in otherLinks" :key="link.title" v-bind="link" />
+          <EssentialLink v-for="link in laudosLinks" :key="link.title" v-bind="link" />
 
-          <q-separator inset class="q-my-sm" />
+          <q-separator inset class="q-my-xs" />
 
-          <q-item class="ML__drawer-item" v-ripple v-for="link in utilsLinks" :key="link.title" clickable>
+          <EssentialLink v-for="link in agendaLinks" :key="link.title" v-bind="link" />
+
+          <q-item class="ML__drawer-item q-mt-lg" v-ripple v-for="link in utilsLinks" :key="link.title" clickable>
             <q-item-section>
               <q-item-label class="ML__drawer-item__label text-primary">{{ link.title }}
                 <q-icon v-if="link.icon" :name="link.icon" />
@@ -106,7 +140,7 @@ const toggleLeftDrawer = () => {
       </q-scroll-area>
     </q-drawer>
 
-    <AppFooter />
+    <AppFooterLogged />
 
     <q-page-container>
       <router-view />

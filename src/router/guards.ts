@@ -35,6 +35,12 @@ const login = (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext) => {
+  const { token } = useMainStore()
+  if (token) {
+    next({ name: 'home' })
+    return
+  }
+
   const issuer = 'http://localhost:8080/oauth/authorize'
   const params = {
     response_type: 'code',

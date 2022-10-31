@@ -11,9 +11,12 @@ const state = reactive<State>({
 })
 
 const search = async () => {
-  const response = await services.user.findById(1)
-  console.log(response)
-  state.usuario = response.data.content
+  try {
+    const response = await services.user.findById(1)
+    state.usuario = response.data.content
+  } catch (error) {
+
+  }
 }
 </script>
 

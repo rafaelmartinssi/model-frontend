@@ -44,6 +44,11 @@ const routes: RouteRecordRaw[] = [
         path: '',
         name: 'home',
         component: () => import('src/pages/MainPage.vue')
+      },
+      {
+        path: 'password',
+        name: 'password-change',
+        component: () => import('src/pages/PasswordChangePage.vue')
       }
     ]
   }

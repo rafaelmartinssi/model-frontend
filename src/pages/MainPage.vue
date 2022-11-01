@@ -2,6 +2,9 @@
 import services from 'src/services'
 import { User } from 'src/stores/types'
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 interface State {
   usuario: User
@@ -11,12 +14,11 @@ const state = reactive<State>({
 })
 
 const search = async () => {
-  try {
-    const response = await services.user.findById(1)
-    state.usuario = response.data.content
-  } catch (error) {
-
+  const response = await services.user.findById(1)
+  if (response.errors?.status === 401) {
+    router.push({ name: 'logout' })
   }
+  state.usuario = response.data.content
 }
 </script>
 

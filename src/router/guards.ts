@@ -12,7 +12,6 @@ const isAuthenticated = async (
   next: NavigationGuardNext) => {
   const main = useMainStore()
   const token = main.token
-
   if (!token) {
     next('/index')
     return

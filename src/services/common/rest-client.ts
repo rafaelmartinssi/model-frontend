@@ -62,14 +62,13 @@ export abstract class RestClient<T extends { id?: number }, F = null> {
         ...filters
       }
     })
-
     return this.handleResponse(response)
   }
 
   protected handleResponse (response: AxiosResponse) {
     let errors: ResponseError | null = null
-    console.log(response.status)
-    if (!response.data && response.status !== 200) {
+
+    if (response.request.status !== 200) {
       errors = {
         status: response.request.status,
         statusText: response.request.statusText

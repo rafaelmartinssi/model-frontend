@@ -21,7 +21,7 @@ const loginPage = () => {
 </script>
 
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-grey-1">
+  <q-layout view="hHh lpR fFf" class="bg-grey-2">
     <q-header elevated class="bg-primary text-white" height-hint="64">
       <q-toolbar class="IL__toolbar">
 

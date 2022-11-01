@@ -74,7 +74,7 @@ const toggleLeftDrawer = () => {
         <q-btn flat dense round @click="toggleLeftDrawer" aria-label="Menu" icon="menu" class="q-mr-sm" />
 
         <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
-          <span class="q-ml-sm">Olá, Rafael</span>
+          <!--<span class="q-ml-sm">Olá, Rafael</span>-->
         </q-toolbar-title>
 
         <q-space />
@@ -83,39 +83,37 @@ const toggleLeftDrawer = () => {
           <q-btn round dense flat color="text-grey-7" icon="apps">
             <q-tooltip>Apps</q-tooltip>
           </q-btn>
-          <q-btn-dropdown fab-mini round rounded flat no-icon-animation dropdown-icon="account_circle">
-            <div class="row no-wrap q-pa-md">
-              <div class="column">
-                <div class="text-h6 q-mb-md">Configurações</div>
-                <q-list>
-                  <q-item clickable v-ripple @click="changePassword">
-                    <q-item-section>Alterar senha</q-item-section>
-                    <q-item-section avatar>
-                      <q-icon color="primary" name="sync_lock"></q-icon>
-                    </q-item-section>
-                  </q-item>
-                </q-list>
-              </div>
-
-              <q-separator vertical inset class="q-mx-lg" />
-
-              <div class="column items-center">
-                <q-avatar size="72px">
-                  <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-                </q-avatar>
-
-                <div class="text-subtitle1 q-mt-md q-mb-xs">Rafael</div>
-
-                <q-btn color="primary" label="SAIR" push size="sm" @click="logout" v-close-popup />
-              </div>
-            </div>
-          </q-btn-dropdown>
+          <q-btn round dense flat color="text-grey-7" icon="logout" @click="logout">
+            <q-tooltip>Sair</q-tooltip>
+          </q-btn>
         </div>
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="bg-white" :width="280">
       <q-scroll-area class="fit">
+        <div class="ML__info-user q-pa-md bg-primary row items-center">
+          <div class="col-3">
+            <q-icon name="account_circle" color="white" size="50px" />
+          </div>
+          <div class="col-9 q-px-sm">
+            <div class="row items-center">
+              <div class="col-9 text-white">Olá, RAFAEL</div>
+            </div>
+            <div class="row items-center cursor-pointer">
+              <div class="col-9 text-white">Meu cadastro</div>
+              <div class="col-2">
+                <q-icon name="chevron_right" color="white" />
+              </div>
+            </div>
+            <div class="row items-center  cursor-pointer" @click="changePassword">
+              <div class="col-9 text-white">Alterar senha</div>
+              <div class="col-2">
+                <q-icon name="chevron_right" color="white" />
+              </div>
+            </div>
+          </div>
+        </div>
         <q-list padding>
 
           <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
@@ -152,6 +150,10 @@ const toggleLeftDrawer = () => {
 .ML {
   &__toolbar {
     height: 64px;
+  }
+
+  &__info-user {
+    height: 100px;
   }
 
   &__toolbar-input {

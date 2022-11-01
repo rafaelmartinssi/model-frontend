@@ -16,6 +16,10 @@ httpClient.interceptors.request.use((config) => {
   return config
 })
 
+httpClient.interceptors.response.use((response) => response, (error) => {
+  return error
+})
+
 export default {
   user: new UserService(httpClient),
   token: new TokenService(httpClient)

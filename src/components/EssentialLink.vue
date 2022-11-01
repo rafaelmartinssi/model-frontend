@@ -1,5 +1,5 @@
 <template>
-  <q-item class="ML__drawer-item" v-ripple clickable>
+  <q-item class="ML__drawer-item" v-ripple clickable @click="$router.push(path)">
     <q-item-section avatar>
       <q-icon :name="icon" color="primary" />
     </q-item-section>

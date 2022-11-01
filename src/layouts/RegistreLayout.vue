@@ -4,7 +4,7 @@ const nome = ref('')
 </script>
 
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-yellow-14">
+  <q-layout view="hHh lpR fFf" class="bg-grey-2">
     <q-page-container>
       <div class="RL__form row">
         <q-card class="col-sm-10 col-sm-8 col-md-8 col-lg-4 col-xl-4 q-pa-xl">
